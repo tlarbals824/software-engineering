@@ -11,18 +11,16 @@ pipeline {
 
         stage('Build') {
             steps {
+                sh mkdir 'classes'
                 // Java 파일들을 컴파일하여 생성된 클래스 파일을 classes 디렉토리에 저장
                 sh 'javac -encoding UTF-8 -classpath "lib/*" -d classes UnitTest/src/*.java'
             }
         }
 
         stage('Test') {
-            environment {
-                CLASSPATH = "classes;lib/*"
-            }
             steps {
                 // JUnit 5 테스트 실행
-                sh 'java -cp "classes;lib/junit-platform-console-standalone-1.7.1.jar" org.junit.platform.console.ConsoleLauncher --scan-classpath > test_results.txt'
+                sh 'java -cp "lib/junit-platform-console-standalone-1.7.1.jar" org.junit.platform.console.ConsoleLauncher --scan-classpath > test_results.txt'
             }
         }
     }
