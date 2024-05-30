@@ -17,11 +17,12 @@ pipeline {
         }
 
         stage('Test') {
+            environment {
+                CLASSPATH = "classes;lib/*"
+            }
             steps {
-                // JUnit 5 테스트 실행을 위한 classpath 설정
-                def classpath = "classes:lib/*"
                 // JUnit 5 테스트 실행
-                bat "java -cp ${classpath} org.junit.platform.console.ConsoleLauncher --scan-classpath > test_results.txt"
+                bat 'java -cp $CLASSPATH org.junit.platform.console.ConsoleLauncher --scan-classpath > test_results.txt'
             }
         }
     }
