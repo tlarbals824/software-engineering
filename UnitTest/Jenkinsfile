@@ -22,7 +22,7 @@ pipeline {
             }
             steps {
                 // JUnit 5 테스트 실행
-                sh 'java -cp classes;lib/junit-platform-console-standalone-1.7.1.jar org.junit.platform.console.ConsoleLauncher --scan-classpath > test_results.txt'
+                sh 'java -cp "classes;lib/junit-platform-console-standalone-1.7.1.jar" org.junit.platform.console.ConsoleLauncher --scan-classpath > test_results.txt'
             }
         }
     }
